@@ -112,3 +112,27 @@ console.log(CheckLogin("user", "12345"));
 // || is used to check if at least one of the value is true.
 
 // Task 5
+function calculateExpenses(food, transport, internet, entertainment, income) {
+  
+  const totalExpenses = food + transport + internet + entertainment;
+
+  const averageExpense = totalExpenses / 4;
+
+  const highestExpense = Math.max(food, transport, internet, entertainment);
+
+  const remainingMoney = income - totalExpenses;
+
+  return {
+    totalExpenses: totalExpenses,
+    averageExpense: averageExpense,
+    highestExpense: highestExpense,
+    remainingMoney: remainingMoney
+  };
+}
+
+const myReport = calculateExpenses(5000, 3000, 7000, 4000, 100000);
+
+console.log("Total Expenses:   " + myReport.totalExpenses);   
+console.log("Average Expense: " + myReport.averageExpense); 
+console.log("Highest Expense: " + myReport.highestExpense); 
+console.log("Remaining Money: " + myReport.remainingMoney); 
