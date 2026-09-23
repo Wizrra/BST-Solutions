@@ -107,6 +107,8 @@ function analyzeNumber(number) {
   console.log(positiveNegativeZero(25));
   console.log(positiveNegativeZero(-10));
   console.log(positiveNegativeZero(0));
+  console.log(positiveNegativeZero(-7));
+  console.log(positiveNegativeZero(-50));
 
   function evenOdd(number) {
     if (number % 2 === 0) {
@@ -116,10 +118,12 @@ function analyzeNumber(number) {
     }
   }
 
-  console.log(analyzeNumber(5.5));
-  console.log(analyzeNumber(-4.2));
-  console.log(analyzeNumber(100));
-
+  console.log(evenOdd(-4.2));
+  console.log(evenOdd(25));
+  console.log(evenOdd(19));
+  console.log(evenOdd(50));
+  console.log(evenOdd(100));
+  
   function integerDecimal(number) {
     if (Number.isInteger(number)) {
       return "Integer";
@@ -127,9 +131,8 @@ function analyzeNumber(number) {
       return "Decimal";
     }
   }
-  console.log(analyzeNumber(-7));
-  console.log(analyzeNumber(0.8));
-  console.log(analyzeNumber(2026));
-  console.log(analyzeNumber(-50));
+  console.log(integerDecimal(5.5));
+  console.log(integerDecimal(0.8));
+  console.log(integerDecimal(2026));
 }
 analyzeNumber();
