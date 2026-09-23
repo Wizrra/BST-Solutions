@@ -80,6 +80,9 @@ console.log(Hikmah);
 let Fatimah = calculateGrade(48, 75, 92, 10);
 console.log(Fatimah);
 
+let Hakeem = calculateGrade(59, 60, 69, 70, 79, 80, 89, 90);
+console.log(Hakeem);
+
 // Task 4
 
 const username = "admin";
