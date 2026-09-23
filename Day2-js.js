@@ -43,20 +43,20 @@ console.log(calculateAge(2026, 2030));
 console.log(calculateAge("hello", "Hi"));
 
 // Task 3
-function passwordChecker(input) {
-  let isLong = input.length >= 8;
-  let isUpperCase = input === input.toUpperCase();
-  let isLowerCase = input === input.toLowerCase();
-  let isNumber = typeof input === "number";
+// function passwordChecker(input) {
+//   let isLong = input.length >= 8;
+//   let isUpperCase = input === input.toUpperCase();
+//   let isLowerCase = input === input.toLowerCase();
+//   let isNumber = typeof input === "number";
 
-  if (isLong || isUpperCase || isLowerCase || isNumber) {
-    return "Strong";
-  } else {
-    return "weak";
-  }
-}
-console.log(passwordChecker("7"));
-console.log(passwordChecker("Hikmahtolu"));
+//   if (isLong || isUpperCase || isLowerCase || isNumber) {
+//     return "Strong";
+//   } else {
+//     return "weak";
+//   }
+// }
+// console.log(passwordChecker("7"));
+// console.log(passwordChecker("Hikmahtolu"));
 
 // Task 4
 const product1 = 15000;
