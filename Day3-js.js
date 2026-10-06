@@ -1,4 +1,4 @@
-// TAsk 1
+// Task 1
 const language = [
   "Javascript",
   "Python",
@@ -10,23 +10,26 @@ const language = [
   "Typescript",
 ];
 // Print the first Item
-let check = language.shift();
-console.log(check);
+console.log(language[0]);
+
 // Print the last item
-check = language.pop();
-console.log(check);
+console.log(language[language.length - 1]);
+
 // Print at index 3
-check = language[3];
-console.log(check);
+console.log(language[3]);
+
 // print length
-check = language.length;
-console.log(check);
+languageLength = language.length;
+console.log(languageLength);
+
 // change one language
 language[2] = "Django";
 console.log(language);
+
 // Add New language
 language.unshift("C++");
 console.log(language);
+
 // Remove one language
 language.pop();
 console.log(language);
@@ -95,35 +98,31 @@ const cart = [
   { name: "Airpod", price: 10000, quantity: 3 },
 ];
 
-// Calculate the t=number of products
+// Calculate the number of products
 const length = cart.length;
 console.log(length);
 
 // Calculate the total cart value
-let subTotal = 0;
-let total = 0;
+const totalCartValue = cart.reduce((acc, c) => acc + c.price * c.quantity, 0);
+console.log(totalCartValue);
 
-for (let product of cart) {
-  subTotal += product.price;
-  total += product.price * product.quantity;
-}
-
-console.log(subTotal);
-console.log(total);
-
-// Most expensice and cheapest
+// Most expensive and cheapest
 let mostExpensive = cart[0];
-let cheapest = cart[0];
 
 for (let product of cart) {
   if (product.price > mostExpensive.price) {
     mostExpensive = product;
   }
+}
+
+// Most cheapest
+let cheapest = cart[0];
+
+for (let product of cart) {
   if (product.price < cheapest.price) {
     cheapest = product;
   }
 }
-
 console.log(mostExpensive.name, mostExpensive.price);
 console.log(cheapest.name, cheapest.price);
 
@@ -138,49 +137,47 @@ const users = [
 ];
 
 // Find user by email
-function findUserEmail(email) {
-  const findEmail = users.find(
+function findUserByEmail(email) {
+  const findUsers = users.find(
     (user) => user.email.toLowerCase === email.toLowerCase,
   );
-  return findEmail ? findEmail : null;
+  return findUsers ? findUsers : null;
 }
-console.log(findUserEmail("Hikmah@gmail.com"));
+console.log(findUserByEmail("Hikmah@gmail.com"));
 
 // Find all admins
-function allAdmins(role) {
-  const findAdmin = users.filter((user) => user.role === "admin");
-  return findAdmin ? findAdmin : null;
+function findAllAdmins() {
+  const findUsersByAdmin = users.filter((user) => user.role === "admin");
+  return findUsersByAdmin ? findUsersByAdmin : null;
 }
-console.log(allAdmins("admin"));
+console.log(findAllAdmins("admin"));
 
 // Whether a user exists
-function checkName(name) {
-  let searchName = users.some(
-    (user) => user.name.toLowerCase() === name.toLowerCase(),
+function checkUserExists(name) {
+  let searchIfUserExists = users.some(
+    (user) => user.name.toLowerCase() === name.toLowerCase()
   );
-  return searchName ? searchName : "User Does not exist";
+  return searchIfUserExists ? searchIfUserExists : "User Does not exist";
 }
-console.log(checkName("susan"));
+console.log(checkUserExists("susan"));
 
 // Find users by role
-function checkRole(role) {
-  let searchRole = users.filter(
+function findUsersByRole(role) {
+  let searchUserByRole = users.filter(
     (user) => user.role.toLowerCase() === role.toLowerCase(),
   );
-  return searchRole ? searchRole : "Role does not exist";
+  return searchUserByRole ? searchUserByRole : "Role does not exist";
 }
-console.log(checkRole("frontender"));
+console.log(findUsersByRole("frontender"));
 
 // Task 5
-// const prices = [1000, 2500, 5000, 7500, 10000];
+const prices = [1000, 2500, 5000, 7500, 10000];
 
-function discountPrice(prices) {
-  prices.map((price) => {
-    let discount = price * 0.1;
-    let lastPrice = price - discount;
-    console.log(lastPrice);
-    // return lastPrice;
-  });
+// 10% discount
+  const discountedPrices = prices.map(price => price * 0.9);
+
+  console.log(discountedPrices);
+  
 
   // Prices above 5000 (first method I used before i saw the instruction below to use filter)
   let abovePrice = [];
@@ -211,9 +208,7 @@ function discountPrice(prices) {
   // Sort the prices
   let arrangPrices = prices.sort(function(a, b) {return a - b});
   console.log(arrangPrices);
-  
-}
-console.log(discountPrice((prices = [1000, 2500, 5000, 7500, 10000])));
+
 
 // .map() helps to loop through the arrays one after the other to get the desired result. I used to make it easier
 // .filter() helps to infilterate and choose the above and below prices amongst the others. Tho, I didn't intend using it at first untill i got the instruction

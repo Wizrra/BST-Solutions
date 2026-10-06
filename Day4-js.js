@@ -92,15 +92,8 @@ function getTotalCatalogValue(products) {
 }
 console.log(getTotalCatalogValue(products));
 
+
 // function groupByCategory(products) {
-//   let productByCategory = products.filter(p => {
-//     if (p.category.toLowerCase() === "accessories") {
-//       return products;
-//     }
-//   })
-//   return productByCategory;
-// }
-// console.log(groupByCategory(products));
 
 // function groupByCategory(products) {
 //   let productByCategory = products.reduce((acc, product) => {
@@ -111,6 +104,19 @@ console.log(getTotalCatalogValue(products));
 //   return productByCategory;
 // }
 // console.log(groupByCategory(products));
+
+// 5. Group by category (.reduce)
+function groupByCategory(products) {
+  return products.reduce((grouped, product) => {
+    const category = product.category;
+    if (!grouped[category]) {
+      grouped[category] = [];
+    }
+    grouped[category].push(product);
+    return grouped;
+  }, {});
+}
+console.log(groupByCategory(products));
 
 // Task 4
 const students = [
@@ -167,13 +173,13 @@ function getAverageScore(students) {
 }
 console.log(getAverageScore(students));
 
-function getTopStudents(students) {
+function getTopStudent(students) {
   let topScore = students.reduce((top, s) => {
    return s.score > top.score ? s : top;
   });
   return topScore;
 }
-console.log(getTopStudents(students));
+console.log(getTopStudent(students));
 
 function assignGrade(score) {
   if (score >= 80) return "A";
