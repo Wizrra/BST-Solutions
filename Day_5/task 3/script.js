@@ -44,3 +44,20 @@ toggleBtn.addEventListener("click", function () {
     return (toggleBtn.textContent = "Show Box");
   }
 });
+
+// Life text
+const userInput = document.querySelector("#user-input");
+
+// const userText = userInput.textContent;
+
+userInput.addEventListener("input", function(event) {
+  const liveText = document.querySelector("#live-text");
+  
+  liveText.textContent = event.target.value;
+})
+
+// An event is an action that happens in the browser, such as a user clicking a button, moving the mouse, typing on a keyboard, or the page finishing 
+
+// An event listener is a method (addEventListener) attached to an element that waits ("listens") for a specific event to occur, and then runs a function when it happens.
+
+// Because web pages need to react dynamically to user actions rather than running code straight from top to bottom just once.
