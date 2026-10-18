@@ -6,45 +6,49 @@ const products = [
 
 const productList = document.querySelector("#product-list");
 
-const cartCount = document.querySelector("#cart-count");
+const cartCount = document.querySelector("#cart-count")
 
-const cartTotal = document.querySelector("#cart-total")
+const cartTotal = document.querySelector("#cart-total");
 
 // productList.innerHTML = "";
 
-products.forEach((product) => {
-  const card = document.createElement("div");
-  
-  card.style.border = "1px solid #0077ff";
-  card.style.margin = "10px";
-  card.style.padding = "10px";
-  
-  card.innerHTML = `
-  <h3>${product.name}</h3>
-  <p>Price: NGN ${product.price.toLocaleString()}</p>
-  <button id="card-btn">Add to Cart</button>
-  `;
-  
-  const button = document.querySelector("#card-btn")
+function listOfProduct() {
+  products.forEach((product) => {
+    const card = document.createElement("div");
 
-  // button.addEventListener("click", () => {
-  //   addToCart(product)
-  // })
+    card.style.border = "1px solid purple";
+    card.style.margin = "10px";
+    card.style.padding = "10px";
 
-  productList.appendChild(card);
-});
+    card.innerHTML = `
+    <h3>${product.name}</h3>
+    <p>Price: NGN ${product.price.toLocaleString()}</p>
+    <button id="card-btn">Add to Cart</button>
+    `;
+
+    const button = card.querySelector("#card-btn");
+
+    button.addEventListener("click", () => {
+    addToCart(product)
+      
+      totalPrice()
+    });
+
+    productList.appendChild(card);
+  });
+}
+listOfProduct();
+
+let cart = [];
 
 function addToCart(product) {
   cart.push(product);
-  updateCartUI();
+  cartCount.textContent = cart.length;
 }
 
-// products.forEach((product) => {
-//   const card = document.createElement("div")
+function totalPrice() {
+  const total = cart.reduce((acc, product) => acc + product.price, 0);
 
-//   card.style.border = "1px solid #0077ff";
-//   card.style.margin = "10px";
-//   card.style.padding = "10px";
+  cartTotal.textContent = total.toLocaleString();
+}
 
-//   productList.appendChild(card);
-// })
