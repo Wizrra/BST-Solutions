@@ -7,8 +7,9 @@ const retryBtn = document.getElementById("retry-btn");
 const reloadBtn = document.getElementById("reload-btn");
 const filterInput = document.getElementById("filter-input");
 
-let status = "loading";
+let loadingState = "loading";
 let items = [];
+let allItems = [];
 let errorMessage = "";
 
 
@@ -19,18 +20,28 @@ function toItem(post) {
   };
 }
 
-function render() {
-  loadingEl.hidden = status !== "loading";
-  errorEl.hidden = status !== "error";
-  emptyEl.hidden = status !== "empty";
-  listEl.hidden = status !== "success";
-  retryBtn.disabled = status === "loading";
+function applyFilter() {
+  const search = filterInput.value.trim().toLowerCase();
+  items = allItems
+    .filter((item) => item.title.toLowerCase().includes(search))
+    .slice(0, 10);
 
-  if (status === "error") {
+  loadingState = items.length === 0 ? "empty" : "success";
+  render();
+}
+
+function render() {
+  loadingEl.hidden = loadingState !== "loading";
+  errorEl.hidden = loadingState !== "error";
+  emptyEl.hidden = loadingState !== "empty";
+  listEl.hidden = loadingState !== "success";
+  retryBtn.disabled = loadingState === "loading";
+
+  if (loadingState === "error") {
     errorTextEl.textContent = errorMessage;
   }
 
-  if (status === "success") {
+  if (loadingState === "success") {
     listEl.innerHTML = "";
     items.forEach((item) => {
       const li = document.createElement("li");
@@ -42,7 +53,7 @@ function render() {
 }
 
 async function loadPosts() {
-  status = "loading";
+  loadingState = "loading";
   errorMessage = "";
   render();
 
@@ -53,24 +64,20 @@ async function loadPosts() {
     }
 
     const data = await response.json();
-    const search = filterInput.value.trim().toLowerCase();
-    const filtered = data
-      .map(toItem)
-      .filter((item) => item.title.toLowerCase().includes(search));
-
-    if (filtered.length === 0) {
-      status = "empty";
-      items = [];
-    } else {
-      status = "success";
-      items = filtered.slice(0, 10);
-    }
-  } catch (err) {
-    status = "error";
+    allItems = data.map(toItem);
+    applyFilter();
+  } catch (error) {
+    loadingState = "error";
     items = [];
-    errorMessage = navigator.onLine
-      ? "Something went wrong loading posts. Please try again."
-      : "You appear to be offline. Check your connection and try again.";
+    allItems = [];
+
+    if (!navigator.onLine) {
+      errorMessage = "You appear to be offline. Check your connection and try again.";
+    } else if (error instanceof Error && error.message.startsWith("Could not load posts")) {
+      errorMessage = error.message;
+    } else {
+      errorMessage = "Something went wrong loading posts. Please try again.";
+    }
   }
 
   render();
@@ -78,4 +85,5 @@ async function loadPosts() {
 
 retryBtn.addEventListener("click", loadPosts);
 reloadBtn.addEventListener("click", loadPosts);
+filterInput.addEventListener("input", applyFilter);
 loadPosts();
